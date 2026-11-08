@@ -1,6 +1,10 @@
 package main.java.app;
 
+import java.util.Scanner;
+
 import main.java.domain.Employee;
+import main.java.services.EmployeeService;
+import main.java.services.EmployeeServiceImpl;
 
 public class Main {
   public static void main(String[] args) {
@@ -11,8 +15,8 @@ public class Main {
     System.out.println("");
 
     // Display initial employee information
-    employee01.displayEmployeeInfo();
-    employee02.displayEmployeeInfo();
+    // employee01.displayEmployeeInfo();
+    // employee02.displayEmployeeInfo();
 
     System.out.println("");
     System.out.println("### Updating salaries for both employees ###");
@@ -23,7 +27,26 @@ public class Main {
     employee02.updateEmployeeSalary(10000.00);
 
     // Display updated employee information
-    employee01.displayEmployeeInfo();
-    employee02.displayEmployeeInfo();
+    // employee01.displayEmployeeInfo();
+    // employee02.displayEmployeeInfo();
+
+    Employee[] employees = { employee01, employee02 };
+    EmployeeService service = new EmployeeServiceImpl(employees);
+
+    try {
+      searchEmployeeById(service);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void searchEmployeeById(EmployeeService service) {
+    try (Scanner keyboard = new Scanner(System.in)) {
+      System.out.print("Digite o ID do funcionário a ser pesquisado: ");
+      int employeeIdToSearch = keyboard.nextInt();
+
+      Employee found = service.findEmployeeById(employeeIdToSearch);
+      found.displayEmployeeInfo();
+    }
   }
 }
