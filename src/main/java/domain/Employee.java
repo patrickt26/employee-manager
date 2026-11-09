@@ -8,10 +8,11 @@ public class Employee {
   public String email;
   public double salary;
 
-  public Employee(String name, String email) {
+  public Employee(String name, String email, double salary) {
     this.id = idCounter++;
     this.name = name;
     this.email = email;
+    this.salary = salary;
   }
 
   public void updateEmployeeSalary(double newSalary) {
